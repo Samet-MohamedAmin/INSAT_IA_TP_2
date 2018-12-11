@@ -1,0 +1,30 @@
+[
+    {
+        "problem": "8_queens",
+        "parameters": {
+            "domain": [
+                1, 2, 3, 4, 5, 6, 7, 8, 9
+            ],
+            "variables": [
+                "Q0", "Q1", "Q2", "Q3", "Q4", "Q5", "Q6", "Q7"
+            ],
+            "constraints": [
+
+            ]
+        }
+    },
+    {
+        "problem": "map_filling",
+        "parameters": {
+            "domain": [
+                "R", "G", "B"
+            ],
+            "variables": [
+                "WA", "NT", "Q", "NSW", "V", "SA", "T"
+            ],
+            "constraints": [
+
+            ]
+        }
+    }
+]
