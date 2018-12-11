@@ -6,5 +6,5 @@ Multi-game solving problem using as in input: "domain", "variables" and "constra
 
 # Demonstration
 ## N_Queens:
-![](../demonstration/demo.gif)
+![](./demonstration/demo.gif)
 
