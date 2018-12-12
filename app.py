@@ -5,13 +5,14 @@ from pieces import chess
 
 import time
 
-display = pygame.display.set_mode((600, 600))
 
         
 def main(final_result):
     gridSize = 64
 
     board = chess.Board(gridSize)
+
+    display = pygame.display.set_mode((600, 600))
 
     board.draw()
     pygame.Surface.blit(display, board.image, (0, 0))

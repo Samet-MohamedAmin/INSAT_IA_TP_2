@@ -1,4 +1,3 @@
-import time
 from pieces import queen
 import colors
 
@@ -88,7 +87,6 @@ class Board:
                 pygame.Surface.blit(self.image, piece.image, loc)
 
 
-display = pygame.display.set_mode((600, 600))
 
 
 if __name__ == '__main__':

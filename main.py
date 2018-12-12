@@ -97,9 +97,9 @@ if __name__ == '__main__':
          
 
     print('choose the problem')
-    p_choice = 1#int(input('[1] n queens \t [2] map filling'))
+    p_choice = int(input('[1] n queens \t [2] map filling > '))
     print('choose the algorithm')
-    s_choice = 2#int(input('[1] backtrack \t [2] forward'))
+    s_choice = int(input('[1] backtrack \t [2] forward > '))
 
     if p_choice == 1:
         """n_queens"""
