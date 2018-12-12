@@ -19,13 +19,13 @@ def main(final_result):
 
     i = 1
     while True:
-        time.sleep(0.4)
+        time.sleep(0.1)
         if i < len(final_result):
                 board.result = final_result[i]
                 print(final_result[i])
                 if(len(final_result[i]) >= len(final_result[i + 1])):
                         print('*-'*10+'[ROLLBACK]'+'-*'*10)
-                        time.sleep(0.8)
+                        time.sleep(0.2)
                 i += 1
 
         board.update()

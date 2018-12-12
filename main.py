@@ -46,7 +46,7 @@ class csp:
                     if self.backtrack_solve(line+1):
                         return True
 
-                    self.result[line] = '0'
+                    self.result[line] = 0
 
         return False
 
@@ -83,7 +83,7 @@ class csp:
                         #
                         if self.forward_solve(forward_domain, line + 1): return True
                         forward_domain = original
-                        result[line] = '0'
+                        result[line] = 0
 
 
 
@@ -95,9 +95,9 @@ if __name__ == '__main__':
          
 
     print('choose the problem')
-    p_choice = 1 # int(input('[1] n queens \t [2] map filling'))
+    p_choice = int(input('[1] n queens \t [2] map filling'))
     print('choose the algorithm')
-    s_choice = 1 #int(input('[1] backtrack \t [2] forward'))
+    s_choice = int(input('[1] backtrack \t [2] forward'))
 
     if p_choice == 1:
         """n_queens"""
@@ -129,7 +129,7 @@ if __name__ == '__main__':
         """map filling"""
 
         for element in csp_data:
-            if element['problem'] == '8_queens':
+            if element['problem'] == 'map_filling':
                 parameters = element['parameters']
 
 
