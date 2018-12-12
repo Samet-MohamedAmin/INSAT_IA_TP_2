@@ -1,6 +1,0 @@
-FROM fedora 
-
-
-
-CMD ["vi"]
-

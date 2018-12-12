@@ -1,7 +1,7 @@
 #! /bin/python3
 
 import app as main_program
-import json
+import json, time
 
 class csp:
     def __init__(self, domain, vars, problem):
@@ -43,6 +43,7 @@ class csp:
                 self.final_result.append([x for x in res if x])
                 if self.place_or_not_place(line, d):
                     self.result[line] = d
+                    self.print_solution()
                     if self.backtrack_solve(line+1):
                         return True
 
@@ -54,8 +55,7 @@ class csp:
         print('-'*10)
         for i in range(len(self.vars)):
             print('%s is set to %s' %(self.vars[i], self.result[i]))
-
-
+        if self.problem != 1: time.sleep(1)
 
     def remove(self, tmp, line, original):
         FD = [x[:] for x in tmp] # Array.Copy(tmp, FD, tmp.Length)
@@ -71,6 +71,13 @@ class csp:
         return FD
 
 
+    def forward_trace(self, forward_domain):
+        print('-'*30)
+        for i in range(len(forward_domain)):
+            print('line %s is set to %s' %(i, self.result[i]), forward_domain[i])
+            print()
+        if self.problem != 1: time.sleep(1)        
+
 
     def forward_solve(self, forward_domain, line,):
         if line >= len(self.vars): return True
@@ -82,7 +89,8 @@ class csp:
                         self.result[line] = d
                         original = [x[:] for x in forward_domain]
                         forward_domain = self.remove(forward_domain, line, original)
-                        print(self.result)
+                        # print trace
+                        self.forward_trace(forward_domain)
                         self.final_result.append([x for x in self.result if x])
                         if self.forward_solve(forward_domain, line + 1): return True
                         forward_domain = original
