@@ -3,7 +3,6 @@ from pieces import queen
 import colors
 
 import pygame
-display = pygame.display.set_mode((600, 600))
 
 
 
@@ -87,3 +86,10 @@ class Board:
                 loc = [piece.location[0] * self.gridSize,
                        piece.location[1] * self.gridSize]
                 pygame.Surface.blit(self.image, piece.image, loc)
+
+
+display = pygame.display.set_mode((600, 600))
+
+
+if __name__ == '__main__':
+    display = pygame.display.set_mode((600, 600))

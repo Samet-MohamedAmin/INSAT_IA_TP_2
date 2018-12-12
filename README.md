@@ -4,7 +4,16 @@ compte rendu du TP2 Intelligence Artificille par SAMET MohamedAmin et DGHAIS Ahm
 # Description
 Multi-game solving problem using as in input: "domain", "variables" and "constraints" form `./csp/csp.json` file
 
+# Dependencies
+- `python3`
+- `pygame`
+
 # Demonstration
 ## N_Queens:
-![](./demonstration/demo.gif)
+### Backward Solving
+![](demonstration/n_queens_backward.gif)
+
+### Forward Solving
+![](demonstration/n_queens_forward.gif)
+
 

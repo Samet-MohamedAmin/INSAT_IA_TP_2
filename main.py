@@ -4,12 +4,12 @@ import app as main_program
 import json
 
 class csp:
-    def __init__(self, domain, vars, result, problem):
+    def __init__(self, domain, vars, problem):
         self.final_result = []
         self.domain = domain
         # self.constraints = constraints
         self.vars = vars
-        self.result = result
+        self.result = [0]*len(variables)
         self.problem = problem
 
         # n_reines, sudoku
@@ -55,36 +55,38 @@ class csp:
         for i in range(len(self.vars)):
             print('%s is set to %s' %(self.vars[i], self.result[i]))
 
-    def remove(self, tmp, line):
+
+
+    def remove(self, tmp, line, original):
         FD = [x[:] for x in tmp] # Array.Copy(tmp, FD, tmp.Length)
         for i in list(range(line+1, len(tmp))):
             for v in FD[i]:
-                result[i] = v
+                self.result[i] = v
                 if not self.place_or_not_place(i, v):
-                    if v in FD[i]:
-                        del FD[i][v] # FD[i].RemoveAt(index)
-                result[i] = '0'
+                    index = FD[i].index(v)
+                    if index >= 0:
+                        del FD[i][index] # FD[i].RemoveAt(index)
+                self.result[i] = 0
+
+        return FD
+
+
 
     def forward_solve(self, forward_domain, line,):
         if line >= len(self.vars): return True
         else:
             for i in range(line, len(forward_domain)):
-                # if forward_domain[i].count() == 0: return False
+                if len(forward_domain[i]) == 0: return False
                 for d in forward_domain[i]:
                     if self.place_or_not_place(line, d):
                         self.result[line] = d
-                        original = []
-                        for k in range(forward_domain):
-                            original[k] = []
-                            for item in forward_domain:
-                                original[k].append(item)
-                        forward_domain = self.remove(forward_domain, line)
-                        # if you want to see the trace
-                        #
+                        original = [x[:] for x in forward_domain]
+                        forward_domain = self.remove(forward_domain, line, original)
+                        print(self.result)
+                        self.final_result.append([x for x in self.result if x])
                         if self.forward_solve(forward_domain, line + 1): return True
                         forward_domain = original
-                        result[line] = 0
-
+                        self.result[line] = 0
 
 
 if __name__ == '__main__':
@@ -95,9 +97,9 @@ if __name__ == '__main__':
          
 
     print('choose the problem')
-    p_choice = int(input('[1] n queens \t [2] map filling'))
+    p_choice = 1#int(input('[1] n queens \t [2] map filling'))
     print('choose the algorithm')
-    s_choice = int(input('[1] backtrack \t [2] forward'))
+    s_choice = 2#int(input('[1] backtrack \t [2] forward'))
 
     if p_choice == 1:
         """n_queens"""
@@ -108,8 +110,7 @@ if __name__ == '__main__':
 
         variables = parameters['variables'] #['Q'+str(i) for i in range(8)]
         domain = parameters['domain'] #list(range(1, 9))
-        result = [0]*len(variables) #[0]*8
-        p = csp(domain, variables, result, p_choice)
+        p = csp(domain, variables, p_choice)
         if s_choice == 1:
             if not p.backtrack_solve(0):
                 print('there\'s no solution')
@@ -125,6 +126,9 @@ if __name__ == '__main__':
                 print('THERE\'S NO SOLUTION')
             p.print_solution()
 
+            main_program.main(p.final_result)
+
+
     elif p_choice == 2:
         """map filling"""
 
@@ -135,9 +139,8 @@ if __name__ == '__main__':
 
         variables = parameters['variables'] #['WA', 'NT', 'Q', 'NSW', 'V', 'SA', 'T']
         domain = parameters['domain'] #['R', 'G', 'B']
-        result = [0]*len(variables)
 
-        p = csp(domain, variables, result, p_choice)
+        p = csp(domain, variables, p_choice)
 
         if s_choice == 1:
             if not p.backtrack_solve(0):
@@ -146,7 +149,7 @@ if __name__ == '__main__':
 
         if s_choice == 2:
             forward_domain = []
-            for i in range(8):
+            for i in range(len(variables)):
                 forward_domain.append(list(domain))
             if not p.forward_solve(forward_domain, 0):
                 print('THERE\'S NO SOLUTION')
